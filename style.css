@@ -1,0 +1,41 @@
+body {
+      background: #f8f9fa;
+    }
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      height: 100%;
+      border: solid rgb(153, 153, 153) 1px;
+    }
+      .card-img-top {
+      height: auto;          
+      object-fit: contain;      
+      width: 100%;             
+     }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .titulo {
+      font-weight: bold;
+      font-size: 2rem;
+    }
+    .descricao {
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+    .carinho{
+        height: 2rem;
+        width: 5rem;    
+    }
+
+    .texto_botao{
+        display: flex;
+        gap: 9.8rem;
+    }
+
+    #carrosselJJ img {
+    height: 300px;       /* Altura desejada */
+    object-fit: cover;   /* Corta a imagem mantendo proporção */
+  }
