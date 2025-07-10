@@ -95,8 +95,11 @@
     }
 
    async function gerarReciboPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Pega os dados do carrinho do localStorage
+        const items = JSON.parse(localStorage.getItem("dadosCarrinho")) || [];
 
   if (items.length === 0) {
     alert("O carrinho está vazio.");
@@ -171,6 +174,14 @@
 
   doc.save("recibo_jj_carnes.pdf");
 }
+
+    function concluirPedido() {
+    // Salva os dados no localStorage para acessar na próxima página
+     localStorage.setItem("dadosCarrinho", JSON.stringify(items));
+
+     // Vai para a página de recibo
+     window.location.href = "recibo.html";
+    }
 
     // Adiciona o card no HTML
     const container = document.getElementById("produtos");

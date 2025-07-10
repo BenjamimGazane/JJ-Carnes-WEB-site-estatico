@@ -35,6 +35,25 @@ body {
         gap: 9.8rem;
     }
 
+    /* Aumentar fonte na versão mobile (telas até 576px de largura) */
+  @media (max-width: 576px) {
+    body {
+      font-size: 1.2rem; /* aumenta o tamanho base do texto */
+    }
+    h2 {
+      font-size: 2rem !important;
+    }
+    table {
+      font-size: 2rem !important;
+    }
+    p, h5 {
+      font-size: 1rem !important;
+    }
+    button {
+      font-size: 1rem !important;
+    }
+  }
+
     #carrosselJJ img {
     height: 300px;       /* Altura desejada */
     object-fit: cover;   /* Corta a imagem mantendo proporção */
