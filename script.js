@@ -12,8 +12,24 @@
         ,
         {
             imagem : "Imagem/Alcatra.jpg",
-            nome : "Bife Alcatra",
+            nome : "Bife Chuck",
             preco : "850Mts/kg"
+        }
+        ,
+        {
+            imagem : "Imagem/babalaze.jpg",
+            nome : "Babalaze",
+            preco : "650Mts/kg"
+        } ,
+        {
+            imagem : "Imagem/Palone_simply_chicken.jpg",
+            nome : "Palone de galinha",
+            preco : "250Mts/kg"
+        },
+        {
+            imagem : "Imagem/Chourico.jpg",
+            nome : "Chourico de vaca",
+            preco : "250Mts/kg"
         }
     ];
     let items = []
@@ -47,7 +63,7 @@
         <img src="${item.imagem}" alt="${item.nome}" 
              style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
         <div>
-          <strong>${item.nome}</strong><br>
+          <strong>${item.nome}</strong>
           <span>${item.preco}</span>
         </div>
       </div>
@@ -72,7 +88,9 @@
           <div class="card h-100">
             <img src="${produtos.imagem}" class="card-img-top" alt="${produtos.nome}">
             <div class="card-body">
-              <h5 class="card-title text-danger">${produtos.nome}</h5>
+                <h5 class="card-title text-danger" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    ${produtos.nome}
+                </h5>
               <p class="card-text fw-bold">${produtos.preco}</p>
                <div class="container d-flex justify-content-center">
                <button class="btn btn-danger d-flex align-items-center" onclick='get_carinho("${produtos.imagem}","${produtos.nome}","${produtos.preco}")' style="width: 140px;height: 40px">
@@ -182,6 +200,19 @@
      // Vai para a página de recibo
      window.location.href = "recibo.html";
     }
+
+    function filtrarProdutos() {
+  const termo = document.getElementById("pesquisa").value.toLowerCase();
+  const container = document.getElementById("produtos");
+  container.innerHTML = "";
+
+  produtos.forEach(produto => {
+    if (produto.nome.toLowerCase().includes(termo)) {
+      container.innerHTML += criarCard(produto);
+    }
+  });
+}
+
 
     // Adiciona o card no HTML
     const container = document.getElementById("produtos");
