@@ -213,7 +213,6 @@
   });
 }
 
-
     // Adiciona o card no HTML
     const container = document.getElementById("produtos");
 
