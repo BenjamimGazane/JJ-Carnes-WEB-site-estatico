@@ -34,15 +34,48 @@
     ];
     let items = []
 
-    function get_carinho(imagem,nome,preco){
-        items.push({imagem,nome,preco})
-        alert("Produto adicionado ao carinho")
-        console.log("produto adicionado ao carinho")
+    //Esconder Carroussel
+    const inputPesquisa = document.getElementById("pesquisa");
+    const carrossel = document.getElementById("carrosselJJ");
 
-        for(let i = 0;i < items.length; i++){
-            console.log(items[i]);
-        }
-    }
+    inputPesquisa.addEventListener("focus", () => {
+      carrossel.style.display = "none";
+      inputPesquisa.style.marginTop = "5.5rem";
+    });
+
+    inputPesquisa.addEventListener("blur", () => {
+      carrossel.style.display = "block";
+      inputPesquisa.style.marginTop = "0rem";
+    });
+  //...............................................................
+    function get_carinho(imagem, nome, preco) {
+      items.push({ imagem, nome, preco });
+
+      const alerta = document.getElementById("notificacao-carinho");
+      alerta.classList.remove("d-none");
+      alerta.classList.remove("fade-out");
+      alerta.style.opacity = "1";
+      alerta.textContent = `"${nome}" adicionado ao carrinho!`;
+
+      // Espera 2 segundos e esconde com efeito
+        setTimeout(() => {
+        alerta.classList.add("fade-out");
+    }, 1500);
+
+      console.log("produto adicionado ao carinho");
+    } 
+      document.addEventListener('click', function(event) {
+        const carrinho = document.getElementById('mini-carrinho');
+        const botaoCarrinho = document.getElementById('btn-ver-carinho'); // botão que abre o carrinho
+
+     if (
+        carrinho.style.display === 'block' &&
+        !carrinho.contains(event.target) &&
+        !botaoCarrinho.contains(event.target)
+     ) {
+        carrinho.style.display = 'none';
+       }
+    });
 
     function verCarinho() {
         if (items.length === 0) {
@@ -57,28 +90,29 @@
         lista.innerHTML = ""; // limpa
 
        items.forEach((item, index) => {
-  lista.innerHTML += `
-    <div class="d-flex align-items-center mb-2 border-bottom pb-2 justify-content-between">
-      <div class="d-flex align-items-center">
-        <img src="${item.imagem}" alt="${item.nome}" 
-             style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
-        <div>
-          <strong>${item.nome}</strong>
-          <span>${item.preco}</span>
-        </div>
-      </div>
-      <button class="btn btn-sm btn-outline-danger" onclick="removerItem(${index})">
-        🗑️
-      </button>
-    </div>
-  `;
-});
+          lista.innerHTML += `
+            <div class="d-flex align-items-center mb-2 border-bottom pb-2 justify-content-between">
+              <div class="d-flex align-items-center">
+                  <img src="${item.imagem}" alt="${item.nome}" 
+                  style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
+                    <div>
+                      <strong>${item.nome}</strong>
+                      <span>${item.preco}</span>
+                    </div>
+             </div>
+                <button class="btn btn-sm btn-outline-danger" onclick="removerItem(event, ${index})">
+                🗑️
+                </button>
+          </div>
+        `;
+      });
             carrinhoBox.style.display = "block";
         }
 
-    function removerItem(index){
-        items.splice(index, 1);
-        verCarinho();
+    function removerItem(event, index) {
+      event.stopPropagation(); // impede o clique de subir e fechar o carrinho
+      items.splice(index, 1);
+      verCarinho();
     }
 
     // Função para criar card
@@ -126,28 +160,28 @@
 
   // Agrupar duplicados
   const produtosAgrupados = {};
-  items.forEach(item => {
-    const key = item.nome;
-    if (produtosAgrupados[key]) {
-      produtosAgrupados[key].quantidade += 1;
-    } else {
-      produtosAgrupados[key] = {
-        nome: item.nome,
-        preco: item.preco,
-        quantidade: 1
-      };
-    }
-  });
+    items.forEach(item => {
+      const key = item.nome;
+        if (produtosAgrupados[key]) {
+          produtosAgrupados[key].quantidade += 1;
+        } else {
+          produtosAgrupados[key] = {
+            nome: item.nome,
+            preco: item.preco,
+            quantidade: 1
+          };
+        }
+    });
 
   // Cabeçalho
-  const data = new Date().toLocaleDateString();
-  doc.setFontSize(18);
-  doc.setTextColor(220, 53, 69); // vermelho escuro
-  doc.text("Recibo - JJ Carnes", 20, 20);
+     const data = new Date().toLocaleDateString();
+      doc.setFontSize(18);
+      doc.setTextColor(220, 53, 69); // vermelho escuro
+      doc.text("Recibo - JJ Carnes", 20, 20);
 
-  doc.setFontSize(12);
-  doc.setTextColor(0, 0, 0);
-  doc.text(`Data: ${data}`, 20, 30);
+      doc.setFontSize(12);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Data: ${data}`, 20, 30);
 
   // Tabela
   const tableData = [];
@@ -202,9 +236,9 @@
     }
 
     function filtrarProdutos() {
-  const termo = document.getElementById("pesquisa").value.toLowerCase();
-  const container = document.getElementById("produtos");
-  container.innerHTML = "";
+      const termo = document.getElementById("pesquisa").value.toLowerCase();
+      const container = document.getElementById("produtos");
+      container.innerHTML = "";
 
   produtos.forEach(produto => {
     if (produto.nome.toLowerCase().includes(termo)) {
@@ -219,3 +253,6 @@
     produtos.forEach(produto => {
      container.innerHTML += criarCard(produto);  
 });
+
+ 
+

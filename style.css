@@ -1,38 +1,41 @@
 body {
-      background: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
     }
-    .card {
-      transition: transform 0.3s, box-shadow 0.3s;
-      height: 100%;
-      border: solid rgb(153, 153, 153) 1px;
+    .navbar-brand {
+      letter-spacing: 1px;
     }
-      .card-img-top {
-      height: auto;          
-      object-fit: contain;      
-      width: 100%;             
-     }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    .carousel-caption {
+      padding: 2rem;
+      border-radius: 0.5rem;
     }
-    .titulo {
+    .carousel-inner img {
+      object-fit: cover;
+      height: 75vh;
+    }
+    .btn-light {
       font-weight: bold;
-      font-size: 2rem;
-    }
-    .descricao {
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto;
-      font-size: 1.1rem;
-    }
-    .carinho{
-        height: 2rem;
-        width: 5rem;    
     }
 
     .texto_botao{
-        display: flex;
-        gap: 9.8rem;
+      display: flex;
+    }
+
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    #pesquisa {
+      max-width: 400px;
+      margin: 0 auto;
+      border: 1px solid #dc3545;
+    }
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: rgba(255,255,255,0.7);
     }
     
     #carrosselJJ img {
@@ -40,8 +43,11 @@ body {
     object-fit: cover;   /* Corta a imagem mantendo proporção */
   }
 
-  .texto_carroussel{
-    position: absolute;
-    margin-top: 10rem;
-    margin-left: ;
+    .fade-out {
+    animation: fadeOut 1.5s forwards;
+  }
+
+  @keyframes fadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; display: none; }
   }
